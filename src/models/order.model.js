@@ -108,6 +108,12 @@ orderSchema.pre("save", async function (next) {
   }
 });
 
+orderSchema.pre(/^find/, function (next) {
+  this.populate("user", "name email phone").populate("products.product", "name price category images");
+
+  next();
+});
+
 const validateOrder = (order) => {
   const schema = Joi.object({
     user: Joi.string().required().label("UserId"),

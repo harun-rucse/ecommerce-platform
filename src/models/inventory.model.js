@@ -18,6 +18,12 @@ const inventorySchema = new Schema(
   }
 );
 
+inventorySchema.pre(/^find/, function (next) {
+  this.populate("product", "name price category images");
+
+  next();
+});
+
 const validateInventoryUpdate = (inventory) => {
   const schema = Joi.object({
     quantity: Joi.number().required().label("Quantity"),

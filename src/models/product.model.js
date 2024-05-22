@@ -40,6 +40,12 @@ productSchema.pre("save", function (next) {
   next();
 });
 
+productSchema.pre(/^find/, function (next) {
+  this.populate("category", "name image");
+
+  next();
+});
+
 const validateProduct = (product) => {
   const schema = Joi.object({
     name: Joi.string().required().label("Name"),
