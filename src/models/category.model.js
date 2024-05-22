@@ -13,13 +13,18 @@ const categorySchema = new Schema(
     },
     image: {
       type: String,
-      default: process.env.DEFAULT_CATEGORY_IMAGE,
     },
   },
   {
     timestamps: true,
   }
 );
+
+categorySchema.pre("save", function (next) {
+  this.image = process.env.DEFAULT_CATEGORY_IMAGE;
+
+  next();
+});
 
 const validateCategory = (category) => {
   const schema = Joi.object({

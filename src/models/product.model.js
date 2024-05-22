@@ -25,7 +25,6 @@ const productSchema = new Schema(
     },
     images: {
       type: [String],
-      default: [process.env.DEFAULT_PRODUCT_IMAGE],
     },
   },
   {
@@ -33,11 +32,19 @@ const productSchema = new Schema(
   }
 );
 
+productSchema.index({ name: 1, category: 1 }, { unique: true });
+
+productSchema.pre("save", function (next) {
+  this.images = [process.env.DEFAULT_PRODUCT_IMAGE];
+
+  next();
+});
+
 const validateProduct = (product) => {
   const schema = Joi.object({
     name: Joi.string().required().label("Name"),
-    quantity: Joi.string().required().label("Quantity"),
-    price: Joi.string().required().label("Price"),
+    quantity: Joi.number().required().label("Quantity"),
+    price: Joi.number().required().label("Price"),
     description: Joi.string().label("Description"),
     rating: Joi.string().label("Rating"),
     category: Joi.string().required().label("CategoryId"),
@@ -50,8 +57,7 @@ const validateProduct = (product) => {
 const validateProductUpdate = (product) => {
   const schema = Joi.object({
     name: Joi.string().label("Name"),
-    quantity: Joi.string().label("Quantity"),
-    price: Joi.string().label("Price"),
+    price: Joi.number().label("Price"),
     description: Joi.string().label("Description"),
     rating: Joi.string().label("Rating"),
     category: Joi.string().label("CategoryId"),
