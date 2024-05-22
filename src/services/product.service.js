@@ -1,5 +1,9 @@
 import { Product } from "../models/product.model.js";
 
+const getAllProducts = (filter = {}) => {
+  return Product.find(filter);
+};
+
 const getOneProduct = (filter) => {
   return Product.findOne(filter);
 };
@@ -18,4 +22,4 @@ const deleteOneProduct = (filter) => {
   return Product.findOneAndDelete(filter);
 };
 
-export { getOneProduct, createNewProduct, updateOneProduct, deleteOneProduct };
+export { getAllProducts, getOneProduct, createNewProduct, updateOneProduct, deleteOneProduct };

@@ -1,5 +1,9 @@
 import { User } from "../models/user.model.js";
 
+const getAllUsers = (filter = {}) => {
+  return User.find(filter);
+};
+
 const getOneUser = (filter) => {
   return User.findOne(filter);
 };
@@ -18,4 +22,4 @@ const deleteOneUser = (filter) => {
   return User.findOneAndDelete(filter);
 };
 
-export { getOneUser, createNewUser, updateOneUser, deleteOneUser };
+export { getAllUsers, getOneUser, createNewUser, updateOneUser, deleteOneUser };

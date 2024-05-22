@@ -1,5 +1,9 @@
 import { Inventory } from "../models/inventory.model.js";
 
+const getAllInventories = (filter = {}) => {
+  return Inventory.find(filter);
+};
+
 const getOneInventory = (filter) => {
   return Inventory.findOne(filter);
 };
@@ -18,4 +22,4 @@ const deleteOneInventory = (filter) => {
   return Inventory.findOneAndDelete(filter);
 };
 
-export { getOneInventory, createNewInventory, updateOneInventory, deleteOneInventory };
+export { getAllInventories, getOneInventory, createNewInventory, updateOneInventory, deleteOneInventory };

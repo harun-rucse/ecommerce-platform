@@ -1,9 +1,10 @@
 import express from "express";
+import globalMiddleware from "./bootstrap/global-middleware.js";
+import routes from "./bootstrap/routes.js";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.status(200).send("Hello");
-});
+globalMiddleware(app);
+routes(app);
 
 export default app;

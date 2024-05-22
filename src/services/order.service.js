@@ -1,5 +1,9 @@
 import { Order } from "../models/order.model.js";
 
+const getAllOrders = (filter = {}) => {
+  return Order.find(filter);
+};
+
 const getOneOrder = (filter) => {
   return Order.findOne(filter);
 };
@@ -18,4 +22,4 @@ const deleteOneOrder = (filter) => {
   return Order.findOneAndDelete(filter);
 };
 
-export { getOneOrder, createNewOrder, updateOneOrder, deleteOneOrder };
+export { getAllOrders, getOneOrder, createNewOrder, updateOneOrder, deleteOneOrder };

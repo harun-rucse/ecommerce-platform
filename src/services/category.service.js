@@ -1,5 +1,9 @@
 import { Category } from "../models/category.model.js";
 
+const getAllCategories = (filter = {}) => {
+  return Category.find(filter);
+};
+
 const getOneCategory = (filter) => {
   return Category.findOne(filter);
 };
@@ -18,4 +22,4 @@ const deleteOneCategory = (filter) => {
   return Category.findOneAndDelete(filter);
 };
 
-export { getOneCategory, createNewCategory, updateOneCategory, deleteOneCategory };
+export { getAllCategories, getOneCategory, createNewCategory, updateOneCategory, deleteOneCategory };
