@@ -10,6 +10,11 @@ process.on("uncaughtException", () => {
 });
 
 import app from "./app.js";
+import connectDB from "./bootstrap/database.js";
+
+connectDB().then((connectionInstance) => {
+  logger.info(`DB host [${connectionInstance.connection.host}] connection successful!`);
+});
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
