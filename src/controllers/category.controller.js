@@ -50,7 +50,6 @@ const getOneCategory = catchAsync(async (req, res, next) => {
  */
 const updateOneCategory = catchAsync(async (req, res, next) => {
   const { error } = validateCategoryUpdate(req.body);
-
   if (error) return next(new AppError(error.details[0].message, 400));
 
   const payload = _.pick(req.body, ["name", "description", "image"]);

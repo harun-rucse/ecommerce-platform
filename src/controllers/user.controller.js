@@ -50,7 +50,6 @@ const getOneUser = catchAsync(async (req, res, next) => {
  */
 const updateOneUser = catchAsync(async (req, res, next) => {
   const { error } = validateUserUpdate(req.body);
-
   if (error) return next(new AppError(error.details[0].message, 400));
 
   const payload = _.pick(req.body, ["name", "email", "phone"]);

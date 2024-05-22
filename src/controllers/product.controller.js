@@ -54,7 +54,6 @@ const getOneProduct = catchAsync(async (req, res, next) => {
  */
 const updateOneProduct = catchAsync(async (req, res, next) => {
   const { error } = validateProductUpdate(req.body);
-
   if (error) return next(new AppError(error.details[0].message, 400));
 
   const payload = _.pick(req.body, ["name", "price", "description", "rating", "category", "images"]);
