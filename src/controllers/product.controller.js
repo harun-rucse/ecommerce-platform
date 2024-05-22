@@ -9,7 +9,7 @@ import ApiResponse from "../utils/api-response.js";
 /**
  * @desc    Create a user
  * @route   GET /api/products
- * @access  Public
+ * @access  Private
  */
 const createNewProduct = catchAsync(async (req, res, next) => {
   const { error } = validateProduct(req.body);
@@ -27,7 +27,7 @@ const createNewProduct = catchAsync(async (req, res, next) => {
 /**
  * @desc    Get all products
  * @route   GET /api/products
- * @access  Public
+ * @access  Private
  */
 const getAllProducts = catchAsync(async (req, res, next) => {
   const allProducts = await productService.getAllProducts();
@@ -38,7 +38,7 @@ const getAllProducts = catchAsync(async (req, res, next) => {
 /**
  * @desc    Get single product
  * @route   GET /api/products/id
- * @access  Public
+ * @access  Private
  */
 const getOneProduct = catchAsync(async (req, res, next) => {
   const product = await productService.getOneProduct({ _id: req.params.id });
@@ -50,7 +50,7 @@ const getOneProduct = catchAsync(async (req, res, next) => {
 /**
  * @desc    Update single product
  * @route   PATCH /api/products/id
- * @access  Public
+ * @access  Private
  */
 const updateOneProduct = catchAsync(async (req, res, next) => {
   const { error } = validateProductUpdate(req.body);
@@ -67,7 +67,7 @@ const updateOneProduct = catchAsync(async (req, res, next) => {
 /**
  * @desc    Delete single product
  * @route   DELETE /api/products/id
- * @access  Public
+ * @access  Private
  */
 const deleteOneProduct = catchAsync(async (req, res, next) => {
   const deleteProduct = await productService.deleteOneProduct({ _id: req.params.id });

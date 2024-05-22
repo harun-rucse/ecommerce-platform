@@ -5,8 +5,10 @@ import productRouter from "../routes/product.route.js";
 import categoryRouter from "../routes/category.route.js";
 import inventoryRouter from "../routes/inventory.route.js";
 import orderRouter from "../routes/order.route.js";
+import { checkAPIKey } from "../middlewares/index.js";
 
 const routes = (app) => {
+  app.use(checkAPIKey);
   app.use("/api/users", userRouter);
   app.use("/api/categories", categoryRouter);
   app.use("/api/products", productRouter);

@@ -10,7 +10,7 @@ import ApiResponse from "../utils/api-response.js";
 /**
  * @desc    Create a new order
  * @route   GET /api/orders
- * @access  Public
+ * @access  Private
  */
 const createNewOrder = catchAsync(async (req, res, next) => {
   const session = await mongoose.startSession();
@@ -38,7 +38,7 @@ const createNewOrder = catchAsync(async (req, res, next) => {
 /**
  * @desc    Get all orders
  * @route   GET /api/orders
- * @access  Public
+ * @access  Private
  */
 const getAllOrders = catchAsync(async (req, res, next) => {
   const allOrders = await orderService.getAllOrders();
@@ -49,7 +49,7 @@ const getAllOrders = catchAsync(async (req, res, next) => {
 /**
  * @desc    Get single orders
  * @route   GET /api/orders/id
- * @access  Public
+ * @access  Private
  */
 const getOneOrder = catchAsync(async (req, res, next) => {
   const order = await orderService.getOneOrder({ _id: req.params.id });
@@ -61,7 +61,7 @@ const getOneOrder = catchAsync(async (req, res, next) => {
 /**
  * @desc    Update single orders
  * @route   PATCH /api/orders/id
- * @access  Public
+ * @access  Private
  */
 const updateOneOrder = catchAsync(async (req, res, next) => {
   const { error } = validateOrderUpdate(req.body);

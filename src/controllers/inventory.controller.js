@@ -9,7 +9,7 @@ import ApiResponse from "../utils/api-response.js";
 /**
  * @desc    Get all inventories
  * @route   GET /api/inventories
- * @access  Public
+ * @access  Private
  */
 const getAllInventories = catchAsync(async (req, res, next) => {
   const allInventories = await inventoryService.getAllInventories();
@@ -20,7 +20,7 @@ const getAllInventories = catchAsync(async (req, res, next) => {
 /**
  * @desc    Get single inventory
  * @route   GET /api/inventories/id
- * @access  Public
+ * @access  Private
  */
 const getOneInventory = catchAsync(async (req, res, next) => {
   const inventory = await inventoryService.getOneInventory({ _id: req.params.id });
@@ -32,7 +32,7 @@ const getOneInventory = catchAsync(async (req, res, next) => {
 /**
  * @desc    Add single inventory quantity
  * @route   PATCH /api/inventories/id/add-quantity
- * @access  Public
+ * @access  Private
  */
 const updateOneInventory = catchAsync(async (req, res, next) => {
   const { error } = validateInventoryUpdate(req.body);
@@ -50,7 +50,7 @@ const updateOneInventory = catchAsync(async (req, res, next) => {
 /**
  * @desc    Delete single inventory
  * @route   DELETE /api/inventories/id
- * @access  Public
+ * @access  Private
  */
 const deleteOneInventory = catchAsync(async (req, res, next) => {
   const deleteInventory = await inventoryService.deleteOneInventory({ _id: req.params.id });

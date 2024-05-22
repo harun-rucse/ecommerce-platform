@@ -8,7 +8,7 @@ import ApiResponse from "../utils/api-response.js";
 /**
  * @desc    Create a user
  * @route   GET /api/users
- * @access  Public
+ * @access  Private
  */
 const createNewUser = catchAsync(async (req, res, next) => {
   const { error } = validateUser(req.body);
@@ -23,7 +23,7 @@ const createNewUser = catchAsync(async (req, res, next) => {
 /**
  * @desc    Get all users
  * @route   GET /api/users
- * @access  Public
+ * @access  Private
  */
 const getAllUsers = catchAsync(async (req, res, next) => {
   const allUsers = await userService.getAllUsers();
@@ -34,7 +34,7 @@ const getAllUsers = catchAsync(async (req, res, next) => {
 /**
  * @desc    Get single user
  * @route   GET /api/users/id
- * @access  Public
+ * @access  Private
  */
 const getOneUser = catchAsync(async (req, res, next) => {
   const user = await userService.getOneUser({ _id: req.params.id });
@@ -46,7 +46,7 @@ const getOneUser = catchAsync(async (req, res, next) => {
 /**
  * @desc    Update single user
  * @route   PATCH /api/users/id
- * @access  Public
+ * @access  Private
  */
 const updateOneUser = catchAsync(async (req, res, next) => {
   const { error } = validateUserUpdate(req.body);
@@ -63,7 +63,7 @@ const updateOneUser = catchAsync(async (req, res, next) => {
 /**
  * @desc    Delete single user
  * @route   DELETE /api/users/id
- * @access  Public
+ * @access  Private
  */
 const deleteOneUser = catchAsync(async (req, res, next) => {
   const deleteUser = await userService.deleteOneUser({ _id: req.params.id });

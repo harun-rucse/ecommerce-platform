@@ -8,7 +8,7 @@ import ApiResponse from "../utils/api-response.js";
 /**
  * @desc    Create a category
  * @route   GET /api/categories
- * @access  Public
+ * @access  Private
  */
 const createNewCategory = catchAsync(async (req, res, next) => {
   const { error } = validateCategory(req.body);
@@ -23,7 +23,7 @@ const createNewCategory = catchAsync(async (req, res, next) => {
 /**
  * @desc    Get all categories
  * @route   GET /api/categories
- * @access  Public
+ * @access  Private
  */
 const getAllCategories = catchAsync(async (req, res, next) => {
   const allCategories = await categoryService.getAllCategories();
@@ -34,7 +34,7 @@ const getAllCategories = catchAsync(async (req, res, next) => {
 /**
  * @desc    Get single category
  * @route   GET /api/categories/id
- * @access  Public
+ * @access  Private
  */
 const getOneCategory = catchAsync(async (req, res, next) => {
   const category = await categoryService.getOneCategory({ _id: req.params.id });
@@ -46,7 +46,7 @@ const getOneCategory = catchAsync(async (req, res, next) => {
 /**
  * @desc    Update single category
  * @route   PATCH /api/categories/id
- * @access  Public
+ * @access  Private
  */
 const updateOneCategory = catchAsync(async (req, res, next) => {
   const { error } = validateCategoryUpdate(req.body);
@@ -63,7 +63,7 @@ const updateOneCategory = catchAsync(async (req, res, next) => {
 /**
  * @desc    Delete single category
  * @route   DELETE /api/categories/id
- * @access  Public
+ * @access  Private
  */
 const deleteOneCategory = catchAsync(async (req, res, next) => {
   const deleteCategory = await categoryService.deleteOneCategory({ _id: req.params.id });
