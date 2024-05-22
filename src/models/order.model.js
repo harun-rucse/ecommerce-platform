@@ -1,6 +1,9 @@
 import Joi from "joi";
 import { Schema, model } from "mongoose";
 import { v4 as uniqueId } from "uuid";
+import * as productService from "../services/product.service.js";
+import * as inventoryService from "../services/inventory.service.js";
+import AppError from "../utils/app-error.js";
 
 const addressSchema = new Schema({
   street: { type: String, required: true },
@@ -51,8 +54,8 @@ const orderSchema = new Schema(
     },
     paymentStatus: {
       type: String,
-      required: true,
       enum: ["Paid", "Unpaid"],
+      default: "Unpaid",
     },
   },
   {
@@ -64,6 +67,45 @@ orderSchema.pre("save", function (next) {
   this.orderId = uniqueId();
 
   next();
+});
+
+orderSchema.pre("save", async function (next) {
+  const order = this;
+  let totalAmount = 0;
+
+  try {
+    // First, check all products for availability
+    await Promise.all(
+      order.products.map(async (item) => {
+        const productDetails = await productService.getOneProduct({ _id: item.product });
+        if (!productDetails) throw new AppError("Product not found", 404);
+
+        // Check available quantity in the inventory
+        const inventory = await inventoryService.getOneInventory({ product: productDetails._id });
+        if (!inventory || inventory.quantity < item.quantity) {
+          throw new AppError("Product quantity not available", 400);
+        }
+
+        const price = item.quantity * productDetails.price;
+        item.price = price;
+        totalAmount += price;
+      })
+    );
+
+    // If all checks pass, update the inventories
+    await Promise.all(
+      order.products.map(async (item) => {
+        const inventory = await inventoryService.getOneInventory({ product: item.product });
+        inventory.quantity -= item.quantity;
+        await inventory.save();
+      })
+    );
+
+    order.totalAmount = totalAmount;
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 const validateOrder = (order) => {
@@ -83,7 +125,7 @@ const validateOrder = (order) => {
       postalCode: Joi.string().required().label("PostalCode"),
     }),
     paymentMethod: Joi.string().valid("COD", "CARD").label("PaymentMethod"),
-    paymentStatus: Joi.string().required().valid("Paid", "Unpaid").label("paymentStatus"),
+    paymentStatus: Joi.string().valid("Paid", "Unpaid").label("paymentStatus"),
   });
 
   return schema.validate(order);
