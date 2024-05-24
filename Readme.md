@@ -29,7 +29,7 @@ NODE_ENV=development
 PORT=4000
 CORS_ORIGIN=http://localhost:3000
 
-DATABASE_URL=mongodb://mongodb:27017/ecommerce-platform-dev
+DATABASE_URL=mongodb+srv://harun:tYJ58j13pDdn64Bc@cluster0.bd818dz.mongodb.net/ecommerce-platform
 DEFAULT_PRODUCT_IMAGE=https://res.cloudinary.com/harun-rucse/image/upload/v1679509832/products/default-product.png
 DEFAULT_CATEGORY_IMAGE=https://res.cloudinary.com/harun-rucse/image/upload/v1679509376/categories/default-icon.png
 
@@ -45,7 +45,7 @@ NODE_ENV=production
 PORT=4000
 CORS_ORIGIN=http://localhost:3000
 
-DATABASE_URL=mongodb://mongodb:27017/ecommerce-platform-prod
+DATABASE_URL=mongodb+srv://harun:tYJ58j13pDdn64Bc@cluster0.bd818dz.mongodb.net/ecommerce-platform
 DEFAULT_PRODUCT_IMAGE=https://res.cloudinary.com/harun-rucse/image/upload/v1679509832/products/default-product.png
 DEFAULT_CATEGORY_IMAGE=https://res.cloudinary.com/harun-rucse/image/upload/v1679509376/categories/default-icon.png
 
